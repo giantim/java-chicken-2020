@@ -24,6 +24,10 @@ public class Quantity {
         return new Quantity(this.quantity + quantity.quantity);
     }
 
+    public int getQuantity() {
+        return this.quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
