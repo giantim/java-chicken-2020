@@ -8,7 +8,7 @@ import domain.strategy.DiscountStrategy;
 import domain.strategy.PaymentStrategyFactory;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -16,7 +16,7 @@ public class Orders {
     private Map<Menu, Quantity> orders;
 
     public Orders() {
-        this.orders = new HashMap<>();
+        this.orders = new LinkedHashMap<>();
     }
 
     public void add(Menu menu, Quantity quantity) {

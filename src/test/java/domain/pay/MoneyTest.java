@@ -19,10 +19,10 @@ public class MoneyTest {
     @DisplayName("금액 더하기")
     @Test
     void addTest() {
-        Money money = new Money(5000);
-        Money addMoney = money.add(1000);
+        Money money = new Money(5_000);
+        Money addMoney = money.add(1_000);
 
-        Assertions.assertThat(addMoney).extracting("money").isEqualTo(6000d);
+        Assertions.assertThat(addMoney.getMoney()).isEqualTo(6_000d);
     }
 
     @DisplayName("금액 빼기")
@@ -31,15 +31,15 @@ public class MoneyTest {
         Money money = new Money(5000);
         Money minusMoney = money.minus(3000d);
 
-        Assertions.assertThat(minusMoney).extracting("money").isEqualTo(2000d);
+        Assertions.assertThat(minusMoney.getMoney()).isEqualTo(2_000d);
     }
 
     @DisplayName("금액 할인하기")
     @Test
     void discountMoney() {
-        Money money = new Money(10000);
+        Money money = new Money(10_000);
         Money discountMoney = money.discount(0.95);
 
-        Assertions.assertThat(discountMoney).extracting("money").isEqualTo(9500d);
+        Assertions.assertThat(discountMoney.getMoney()).isEqualTo(9_500d);
     }
 }

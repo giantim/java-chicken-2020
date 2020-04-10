@@ -16,7 +16,7 @@ public class DiscountTest {
         orders.add(MenuFixture.FRIED_CHICKEN, new Quantity(10));
         orders.add(MenuFixture.SOURCE_CHICKEN, new Quantity(15));
 
-        Assertions.assertThat(orders.getPrice(Payment.CASH)).extracting("money").isEqualTo(380_000d);
+        Assertions.assertThat(orders.getPrice(Payment.CASH).getMoney()).isEqualTo(380_000d);
     }
 
     @DisplayName("결제 수단 별 할인 적용")
@@ -26,7 +26,7 @@ public class DiscountTest {
         orders.add(MenuFixture.FRIED_CHICKEN, new Quantity(10));
         orders.add(MenuFixture.SOURCE_CHICKEN, new Quantity(15));
 
-        Assertions.assertThat(orders.getPrice(Payment.CREDIT)).extracting("money").isEqualTo(361_000d);
-        Assertions.assertThat(orders.getPrice(Payment.CASH)).extracting("money").isEqualTo(380_000d);
+        Assertions.assertThat(orders.getPrice(Payment.CREDIT).getMoney()).isEqualTo(361_000d);
+        Assertions.assertThat(orders.getPrice(Payment.CASH).getMoney()).isEqualTo(380_000d);
     }
 }
