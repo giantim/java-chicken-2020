@@ -1,12 +1,9 @@
 package domain.order;
 
-import domain.Menu;
 import domain.MenuFixture;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.AbstractMap;
 
 public class OrdersTest {
     @DisplayName("주문 목록에 메뉴 추가")
