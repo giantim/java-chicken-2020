@@ -5,6 +5,7 @@ import domain.pay.Money;
 import domain.pay.Payment;
 import domain.strategy.ChickenDiscount;
 import domain.strategy.DiscountStrategy;
+import domain.strategy.PaymentStrategyFactory;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,9 +33,12 @@ public class Orders {
                 .sum();
         Money ordersMenuSum = new Money(ordersSum);
 
-        DiscountStrategy discountStrategy = new ChickenDiscount();
-        Money discountChicken = ordersMenuSum.minus(discountStrategy.discount(this.orders));
-        return discountChicken;
+        DiscountStrategy categoryStrategy = new ChickenDiscount();
+        DiscountStrategy paymentStrategy = PaymentStrategyFactory.of(payment);
+        Money discountChicken = ordersMenuSum.minus(categoryStrategy.discount(this.orders));
+        Money discountPayment = discountChicken.discount(paymentStrategy.discount());
+
+        return discountPayment;
     }
 
     public Map<Menu, Quantity> getOrders() {

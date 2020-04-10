@@ -7,4 +7,6 @@ import java.util.Map;
 
 public interface DiscountStrategy {
     double discount(Map<Menu, Quantity> orders);
+
+    double discount();
 }

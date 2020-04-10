@@ -18,4 +18,8 @@ public enum Payment {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 결제수단을 입력했습니다."));
     }
+
+    public boolean isCredit() {
+        return this == CREDIT;
+    }
 }

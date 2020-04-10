@@ -18,4 +18,9 @@ public class ChickenDiscount implements DiscountStrategy {
 
         return CHICKEN_DISCOUNT * (count / CHICKEN_STANDARD);
     }
+
+    @Override
+    public double discount() {
+        throw new UnsupportedOperationException();
+    }
 }
