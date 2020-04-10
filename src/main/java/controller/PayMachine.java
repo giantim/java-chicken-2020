@@ -13,14 +13,12 @@ public class PayMachine implements PosMachine {
     public void execute(Tables tables, Menus menus) {
         OutputView.printTables(tables.getTables());
 
-        int tableNumber = InputView.inputTableNumber();
-        Table table = validateTable(tables, tableNumber);
+        Table table = getTable(tables);
 
         if (table.hasOrder()) {
             OutputView.printOrders(table);
 
-            int paymentNumber = InputView.inputPaymentNumber(tableNumber);
-            Payment payment = Payment.of(paymentNumber);
+            Payment payment = getPayment(table);
             Money amount = table.pay(payment);
             OutputView.printAmount(amount.getMoney());
             table.clearOrders();
@@ -29,12 +27,23 @@ public class PayMachine implements PosMachine {
         System.out.println("주문이 없습니다.");
     }
 
-    private Table validateTable(Tables tables, int tableNumber) {
+    private Table getTable(Tables tables) {
         try {
+            int tableNumber = InputView.inputTableNumber();
             return tables.of(tableNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return validateTable(tables, tableNumber);
+            return getTable(tables);
+        }
+    }
+
+    private Payment getPayment(Table table) {
+        try {
+            int paymentNumber = InputView.inputPaymentNumber(table.getNumber());
+            return Payment.of(paymentNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getPayment(table);
         }
     }
 }

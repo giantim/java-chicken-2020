@@ -38,6 +38,10 @@ public class Table {
         return this.orders.getPrice(payment);
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     @Override
     public String toString() {
         return Integer.toString(number);
