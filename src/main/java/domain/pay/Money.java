@@ -1,4 +1,4 @@
-package domain;
+package domain.pay;
 
 public class Money {
     private double money;
