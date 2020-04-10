@@ -22,6 +22,10 @@ public class QuantityTest {
         Quantity originalQuantity = new Quantity(10);
         Quantity addQuantity = originalQuantity.add(5);
 
+        Quantity fiveQuantity = new Quantity(5);
+        Quantity sevenQuantity = fiveQuantity.add(new Quantity(2));
+
         Assertions.assertThat(addQuantity).extracting("quantity").isEqualTo(15);
+        Assertions.assertThat(sevenQuantity).extracting("quantity").isEqualTo(7);
     }
 }
