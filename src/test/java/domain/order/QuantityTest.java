@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class QuantityTest {
     @DisplayName("잘못된 수량으로 생성시 예외 출력 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {0, 100})
+    @ValueSource(ints = {-1, 100})
     void quantityConstructorTest(int input) {
         Assertions.assertThatThrownBy(() -> {
             new Quantity(input);
