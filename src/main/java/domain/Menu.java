@@ -19,12 +19,16 @@ public class Menu {
         return this.category.isChicken();
     }
 
+    public boolean isSelectMenu(int menuNumber) {
+        return this.number == menuNumber;
+    }
+
     public int getPrice() {
         return this.price;
     }
 
-    public boolean isSelectMenu(int menuNumber) {
-        return this.number == menuNumber;
+    public String getName() {
+        return this.name;
     }
 
     @Override

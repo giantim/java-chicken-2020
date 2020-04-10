@@ -22,4 +22,8 @@ public class Money {
     public Money discount(double percent) {
         return new Money(this.money * percent);
     }
+
+    public double getMoney() {
+        return this.money;
+    }
 }

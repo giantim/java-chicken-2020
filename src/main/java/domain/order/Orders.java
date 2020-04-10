@@ -10,6 +10,7 @@ import domain.strategy.PaymentStrategyFactory;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Orders {
     private Map<Menu, Quantity> orders;
@@ -39,6 +40,21 @@ public class Orders {
         Money discountPayment = discountChicken.discount(paymentStrategy.discount());
 
         return discountPayment;
+    }
+
+    public boolean hasOrder() {
+        return !this.orders.isEmpty();
+    }
+
+    public String history() {
+        return this.orders.entrySet().stream()
+                .map(entry -> entry.getKey().getName() + " " + entry.getValue().getQuantity() + " "
+                        + (entry.getKey().getPrice() * entry.getValue().getQuantity()))
+                .collect(Collectors.joining("\n"));
+    }
+
+    public void clear() {
+        this.orders.clear();
     }
 
     public Map<Menu, Quantity> getOrders() {

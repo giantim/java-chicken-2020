@@ -9,6 +9,7 @@ public class OutputView {
     private static final String TOP_LINE = "┌ ─ ┐";
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
+    private static final String BOTTOM_ORDER_LINE = "└ ₩ ┘";
 
     public static void printMain() {
         System.out.println("## 메인화면");
@@ -23,7 +24,7 @@ public class OutputView {
         final int size = tables.size();
         printLine(TOP_LINE, size);
         printTableNumbers(tables);
-        printLine(BOTTOM_LINE, size);
+        printBottomLine(tables);
     }
 
     public static void printMenus(final List<Menu> menus) {
@@ -39,10 +40,37 @@ public class OutputView {
         System.out.println();
     }
 
+    private static void printBottomLine(final List<Table> tables) {
+        for (Table table : tables) {
+            printBottom(table);
+        }
+        System.out.println();
+    }
+
+    private static void printBottom(Table table) {
+        if (table.hasOrder()) {
+            System.out.print(BOTTOM_ORDER_LINE);
+            return;
+        }
+        System.out.print(BOTTOM_LINE);
+    }
+
     private static void printTableNumbers(final List<Table> tables) {
         for (final Table table : tables) {
             System.out.printf(TABLE_FORMAT, table);
         }
+        System.out.println();
+    }
+
+    public static void printOrders(Table table) {
+        System.out.println("메뉴 수량 금액");
+        System.out.println(table.ordersHistory());
+        System.out.println();
+    }
+
+    public static void printAmount(double money) {
+        System.out.println("## 최종 결제할 금액");
+        System.out.println(String.format("%.0f 원", money));
         System.out.println();
     }
 }

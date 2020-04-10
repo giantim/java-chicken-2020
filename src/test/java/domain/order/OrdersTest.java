@@ -30,4 +30,27 @@ public class OrdersTest {
 
         Assertions.assertThat(orders.getOrders().get(MenuFixture.FRIED_CHICKEN)).isEqualTo(new Quantity(6));
     }
+
+    @DisplayName("주문이 있는지 확인")
+    @Test
+    void hasOrderTest() {
+        Orders noOrders = new Orders();
+        Orders hasOrders = new Orders();
+        hasOrders.add(MenuFixture.SOURCE_CHICKEN, new Quantity(1));
+
+        Assertions.assertThat(noOrders.hasOrder()).isFalse();
+        Assertions.assertThat(hasOrders.hasOrder()).isTrue();
+    }
+
+    @DisplayName("주문 내역 출력")
+    @Test
+    void historyTest() {
+        Orders orders = new Orders();
+        orders.add(MenuFixture.FRIED_CHICKEN, new Quantity(1));
+        orders.add(MenuFixture.SOURCE_CHICKEN, new Quantity(5));
+
+        Assertions.assertThat(orders.history()).isEqualTo(
+                "후라이드 1 16000\n양념치킨 5 80000"
+        );
+    }
 }
