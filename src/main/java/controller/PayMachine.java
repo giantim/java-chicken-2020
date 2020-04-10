@@ -16,12 +16,16 @@ public class PayMachine implements PosMachine {
         int tableNumber = InputView.inputTableNumber();
         Table table = tables.of(tableNumber);
 
-        OutputView.printOrders(table);
+        if (table.hasOrder()) {
+            OutputView.printOrders(table);
 
-        int paymentNumber = InputView.inputPaymentNumber(tableNumber);
-        Payment payment = Payment.of(paymentNumber);
-        Money amount = table.pay(payment);
-        OutputView.printAmount(amount.getMoney());
-        table.clearOrders();
+            int paymentNumber = InputView.inputPaymentNumber(tableNumber);
+            Payment payment = Payment.of(paymentNumber);
+            Money amount = table.pay(payment);
+            OutputView.printAmount(amount.getMoney());
+            table.clearOrders();
+            return;
+        }
+        System.out.println("주문이 없습니다.");
     }
 }
