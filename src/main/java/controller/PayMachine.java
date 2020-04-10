@@ -14,7 +14,7 @@ public class PayMachine implements PosMachine {
         OutputView.printTables(tables.getTables());
 
         int tableNumber = InputView.inputTableNumber();
-        Table table = tables.of(tableNumber);
+        Table table = validateTable(tables, tableNumber);
 
         if (table.hasOrder()) {
             OutputView.printOrders(table);
@@ -27,5 +27,14 @@ public class PayMachine implements PosMachine {
             return;
         }
         System.out.println("주문이 없습니다.");
+    }
+
+    private Table validateTable(Tables tables, int tableNumber) {
+        try {
+            return tables.of(tableNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return validateTable(tables, tableNumber);
+        }
     }
 }

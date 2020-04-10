@@ -19,13 +19,9 @@ public class QuantityTest {
     @DisplayName("수량 더하기 기능")
     @Test
     void addQuantityTest() {
-        Quantity originalQuantity = new Quantity(10);
-        Quantity addQuantity = originalQuantity.add(5);
-
         Quantity fiveQuantity = new Quantity(5);
         Quantity sevenQuantity = fiveQuantity.add(new Quantity(2));
 
-        Assertions.assertThat(addQuantity).extracting("quantity").isEqualTo(15);
-        Assertions.assertThat(sevenQuantity).extracting("quantity").isEqualTo(7);
+        Assertions.assertThat(sevenQuantity.getQuantity()).isEqualTo(7);
     }
 }

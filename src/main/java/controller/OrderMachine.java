@@ -14,15 +14,40 @@ public class OrderMachine implements PosMachine {
         OutputView.printTables(tables.getTables());
 
         int tableNumber = InputView.inputTableNumber();
-        Table table = tables.of(tableNumber);
+        Table table = validateTable(tables, tableNumber);
 
         OutputView.printMenus(menus.getMenus());
-
         int menuNumber = InputView.inputMenuNumber();
-        Menu menu = menus.of(menuNumber);
+        Menu menu = validateMenu(menus, menuNumber);
 
         int quantityNumber = InputView.inputQuantityNumber();
-        Quantity quantity = new Quantity(quantityNumber);
-        table.addMenu(menu, quantity);
+        validateAddMenu(table, menu, quantityNumber);
+    }
+
+    private Table validateTable(Tables tables, int tableNumber) {
+        try {
+            return tables.of(tableNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return validateTable(tables, tableNumber);
+        }
+    }
+
+    private Menu validateMenu(Menus menus, int menuNumber) {
+        try {
+            return menus.of(menuNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return validateMenu(menus, menuNumber);
+        }
+    }
+
+    private void validateAddMenu(Table table, Menu menu, int quantityNumber) {
+        try {
+            Quantity quantity = new Quantity(quantityNumber);
+            table.addMenu(menu, quantity);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
